@@ -38,28 +38,35 @@ import { Link } from "react-router-dom";
 
 function Nav() {
     return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-            Navbar
-        </Link>
-        <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-            <li className="nav-item">
-                <Link to="/sign-up" className="nav-link active" aria-current="page">
-                    Sign up
+        <nav className="navbar navbar-expand-lg navbar-dark" style={styles.nav}>
+            <div className="container-fluid">
+                <Link className="navbar-brand" to="/">
+                    Home
                 </Link>
-            </li>
-            <li className="nav-item">
-                <Link to="/sign-in" className="nav-link">
-                    Sign in
-                </Link>
-            </li>
-            </ul>
-        </div>
-        </div>
-    </nav>
+                <div className="navbar-expand" id="navbarNav">
+                    <ul className="navbar-nav d-flex flex-row ">
+                        <li className="nav-item">
+                            <Link to="/sign-up" className="nav-link">
+                                Sign up
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/sign-in" className="nav-link">
+                                Sign in
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     );
 }
 
 export default Nav;
+
+const styles = {
+
+    nav: {
+        backgroundColor: "#274e67"
+    },
+}

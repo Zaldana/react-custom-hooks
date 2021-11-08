@@ -67,7 +67,7 @@ function Signin() {
         <div className="form-div-signin">
             <main className="form-signin">
                 <form onSubmit={handleSubmit}>
-                    <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                    <h1 className="h3 mb-3 fw-normal">Please Sign In</h1>
 
                     <div className="form-floating">
                         <input
@@ -80,7 +80,7 @@ function Signin() {
                             onBlur={() => setEmailOnBlur(true)}
                         />
                         <div>{emailError && emailError}</div>
-                        <label htmlFor="floatingInput">Email address</label>
+                        <label htmlFor="floatingInput">Email Address</label>
                     </div>
 
                     <div className="form-floating">

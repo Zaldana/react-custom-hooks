@@ -89,7 +89,7 @@ function Signup() {
         <div className="form-div-signup">
             <main className="form-signin">
                 <form onSubmit={handleSubmit}>
-                    <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
+                    <h1 className="h3 mb-3 fw-normal">Please Sign Up</h1>
 
                     <div className="form-floating">
                         <input
@@ -159,7 +159,7 @@ function Signup() {
                     </div>
 
                     <button className="w-100 btn btn-lg btn-primary" type="submit">
-                        Sign up
+                        Sign Up
                     </button>
                 </form>
             </main>
