@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import EmailHooks from '../../hooks/EmailHooks';
 import PasswordHooks from '../../hooks/PasswordHooks';
 import "./Signin.css"
+import { useNavigate } from 'react-router-dom';
+import CheckToken from '../../hooks/CheckToken';
 
+function Signin({ setUser }) {
 
-function Signin() {
+    const navigate = useNavigate()
+
+    const { checkJwtToken } = CheckToken()
 
     const [
         email,
@@ -19,16 +25,20 @@ function Signin() {
     const [
         password,
         handlePasswordOnChange,
-        ,
-        ,
-        ,
     ] = PasswordHooks();
+
+    useEffect(() => {
+        if (checkJwtToken()) {
+            navigate("/")
+        }
+    }, []);
 
     async function handleSubmit(e) {
 
         e.preventDefault();
 
         try {
+
             let payload = await axios.post(
                 "http://localhost:3001/api/users/login",
                 {
@@ -36,6 +46,17 @@ function Signin() {
                     password,
                 }
             );
+
+            window.localStorage.setItem("jwtToken", payload.data.payload)
+
+            let decodedToken = jwtDecode(payload.data.payload);
+
+            setUser({
+                email: decodedToken.email,
+                username: decodedToken.username,
+            })
+
+            navigate("/protected-home")
 
             toast.success("Logged In", {
                 position: "top-right",
@@ -47,7 +68,6 @@ function Signin() {
                 progress: undefined,
             });
 
-            console.log(payload.data.payload);
 
         } catch (e) {
 

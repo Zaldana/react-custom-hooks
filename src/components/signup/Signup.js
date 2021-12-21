@@ -1,4 +1,3 @@
-import React from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import FirstNameHooks from '../../hooks/FirstNameHook';
@@ -6,10 +5,18 @@ import LastNameHooks from '../../hooks/LastNameHooks'
 import UsernameHooks from '../../hooks/UsernameHooks';
 import PasswordHooks from '../../hooks/PasswordHooks';
 import EmailHooks from '../../hooks/EmailHooks';
+import CheckToken from '../../hooks/CheckToken';
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react'
 import "./Signup.css"
 
 
 function Signup() {
+
+    const navigate = useNavigate()
+
+    const { checkJwtToken } = CheckToken()
+
     const [firstName, handleFirstNameOnChange, firstNameError] = FirstNameHooks();
 
     const [
@@ -44,7 +51,14 @@ function Signup() {
         setEmailOnBlur,
     ] = EmailHooks();
 
+    useEffect(() => {
+        if (checkJwtToken()) {
+            navigate("/")
+        }
+    }, []);
+
     async function handleSubmit(e) {
+        
         e.preventDefault();
 
         try {
